@@ -431,11 +431,14 @@ static CVReturn OnDisplayLink(CVDisplayLinkRef CV_NONNULL displayLink,
 
 - (CVPixelBufferRef)copyPixelBuffer {
   CMTime outputItemTime = [_videoOutput itemTimeForHostTime:CACurrentMediaTime()];
-  if ([_videoOutput hasNewPixelBufferForItemTime:outputItemTime]) {
+
+  return [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
+
+  /*if ([_videoOutput hasNewPixelBufferForItemTime:outputItemTime]) {
     return [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
   } else {
     return NULL;
-  }
+  }*/
 }
 
 - (void)onTextureUnregistered:(NSObject<FlutterTexture>*)texture {
