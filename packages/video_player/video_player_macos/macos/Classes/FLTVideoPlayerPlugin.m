@@ -434,7 +434,11 @@ static CVReturn OnDisplayLink(CVDisplayLinkRef CV_NONNULL displayLink,
 - (CVPixelBufferRef)copyPixelBuffer {
   CMTime outputItemTime = [_videoOutput itemTimeForHostTime:CACurrentMediaTime()];
   if ([_videoOutput hasNewPixelBufferForItemTime:outputItemTime]) {
-    return [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
+    CVPixelBufferRef  _Nullable frame = [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
+    if (frame == NULL) {
+      NSLog(@"copyPixelBufferForItemTime returned NULL");
+    }
+    return frame;
   } else {
     NSLog(@"Returning NULL from copyPixelBuffer");
     return NULL;
