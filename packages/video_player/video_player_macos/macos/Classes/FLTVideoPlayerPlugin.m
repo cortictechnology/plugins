@@ -31,6 +31,7 @@ int64_t FLTCMTimeToMillis(CMTime time) {
 }
 
 - (void)notifyFrameAvailable {
+  NSLog(@"Calling textureFrameAvailable");
   [_registry textureFrameAvailable:_textureId];
 }
 @end
@@ -435,6 +436,7 @@ static CVReturn OnDisplayLink(CVDisplayLinkRef CV_NONNULL displayLink,
   if ([_videoOutput hasNewPixelBufferForItemTime:outputItemTime]) {
     return [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
   } else {
+    NSLog(@"Returning NULL from copyPixelBuffer");
     return NULL;
   }
 }
