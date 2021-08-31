@@ -165,7 +165,8 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 }
 
 - (void)notifyFrameAvailable {
-  if (!_playerItem || _playerItem.status != AVPlayerItemStatusReadyToPlay) {
+  CMTime outputItemTime = [_videoOutput itemTimeForHostTime:CACurrentMediaTime()];
+  if (!_playerItem || _playerItem.status != AVPlayerItemStatusReadyToPlay || ![_videoOutput hasNewPixelBufferForItemTime:outputItemTime]) {
     return;
   }
   [_frameUpdater notifyFrameAvailable];
