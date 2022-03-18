@@ -367,9 +367,9 @@ static CVReturn OnDisplayLink(CVDisplayLinkRef CV_NONNULL displayLink,
       return;
     }
     // The player may be initialized but still needs to determine the duration.
-    if ([self duration] == 0) {
-      return;
-    }
+//    if ([self duration] == 0) {
+//      return;
+//    }
 
     _isInitialized = true;
     _eventSink(@{
